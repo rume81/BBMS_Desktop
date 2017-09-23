@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LoanAgreementDeed" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9ecaec46-2ecc-4767-b45f-731a0436093d">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="48"/>
+	<queryString>
+		<![CDATA[SELECT bill_credit_application_datas2.department_code,
+bill_credit_application_datas2.department_name,
+bill_credit_application_datas2.bank_code,
+bill_credit_application_datas2.financial_institution_name,
+name_conversions.financial_institution_name nc_name,
+bill_credit_application_datas2.successful_bid_interest_rate,
+bill_credit_application_datas2.successful_bid_price,
+bill_credit_application_datas2.bill_number,
+substr(bill_credit_application_datas2.drawer_date,7)  AS drawer_yy, substr(bill_credit_application_datas2.drawer_date,4,2)  AS drawer_mm, substr(bill_credit_application_datas2.drawer_date,1,2) AS drawer_dd,
+substr(bill_credit_application_datas2.maturity_date,7)  AS maturity_yy, substr(bill_credit_application_datas2.maturity_date,4,2) AS maturity_mm, substr(bill_credit_application_datas2.maturity_date,1,2) AS maturity_dd,
+bill_credit_application_datas2.number_of_days,
+bill_credit_application_datas2.interest_rate,
+bill_credit_application_datas2.amount_of_money,
+bill_credit_application_datas2.interest_amount,
+bill_credit_application_datas2.remarks,
+bill_credit_application_datas2.account_number,
+base.chairman_name,
+base.chairman_name_2,
+base.minister_of_finance,
+base.street_address,
+contracts_wording.horei01,
+contracts_wording.horei02
+FROM bill_credit_application_datas2 LEFT JOIN name_conversions ON bill_credit_application_datas2.bank_code = name_conversions.bank_code
+LEFT JOIN base ON bill_credit_application_datas2.department_code = base.department_code
+LEFT JOIN contracts_wording ON bill_credit_application_datas2.department_code = contracts_wording.department_code]]>
+	</queryString>
+	<field name="department_code" class="java.lang.Object"/>
+	<field name="department_name" class="java.lang.Object"/>
+	<field name="bank_code" class="java.lang.Object"/>
+	<field name="financial_institution_name" class="java.lang.Object"/>
+	<field name="nc_name" class="java.lang.Object"/>
+	<field name="successful_bid_interest_rate" class="java.lang.Object"/>
+	<field name="successful_bid_price" class="java.lang.Object"/>
+	<field name="bill_number" class="java.lang.Object"/>
+	<field name="drawer_yy" class="java.lang.Integer"/>
+	<field name="drawer_mm" class="java.lang.Integer"/>
+	<field name="drawer_dd" class="java.lang.Integer"/>
+	<field name="maturity_yy" class="java.lang.Integer"/>
+	<field name="maturity_mm" class="java.lang.Integer"/>
+	<field name="maturity_dd" class="java.lang.Integer"/>
+	<field name="number_of_days" class="java.lang.Object"/>
+	<field name="interest_rate" class="java.lang.Object"/>
+	<field name="amount_of_money" class="java.lang.Object"/>
+	<field name="interest_amount" class="java.lang.Object"/>
+	<field name="remarks" class="java.lang.Object"/>
+	<field name="account_number" class="java.lang.Object"/>
+	<field name="chairman_name" class="java.lang.Object"/>
+	<field name="chairman_name_2" class="java.lang.Object"/>
+	<field name="minister_of_finance" class="java.lang.Object"/>
+	<field name="street_address" class="java.lang.Object"/>
+	<field name="horei01" class="java.lang.Object"/>
+	<field name="horei02" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="148" splitType="Stretch">
+			<staticText>
+				<reportElement x="445" y="0" width="19" height="20" uuid="437efa79-3dda-452e-8402-783aa09911ad"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[第]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="464" y="0" width="68" height="20" uuid="59bc677d-96b6-4cde-8717-6b0398076961"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bill_number}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="532" y="0" width="23" height="20" uuid="9a3abb8d-958f-4bf9-acf0-c240a362b4d3"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[号]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement x="445" y="19" width="110" height="20" uuid="bcdf27f1-394a-427d-8c1a-f94b3b15aa0b"/>
+				<textElement textAlignment="Left">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["平成" +($F{drawer_yy}-1988)+"年"+$F{drawer_mm}+"月"+$F{drawer_dd}+"日"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="143" y="35" width="291" height="20" uuid="fb2a9ca1-9250-4527-b9a5-b65b9a2aad65"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[金　銭　消　費　貸　借　契　約　証　書]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="23" y="61" width="278" height="20" uuid="fd0fb331-a7fb-4027-85b4-665aee5ab728"/>
+				<textFieldExpression><![CDATA[$F{financial_institution_name} +"            御中"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="277" y="81" width="278" height="47" uuid="73b086a0-c883-4304-93f4-9315030d262d"/>
+				<textFieldExpression><![CDATA[$F{street_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="316" y="128" width="239" height="20" uuid="decfc45e-680c-400a-adc7-09a8454ed15c"/>
+				<textFieldExpression><![CDATA[$F{chairman_name_2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="594" splitType="Stretch">
+			<staticText>
+				<reportElement x="9" y="0" width="57" height="20" uuid="24f5b114-9573-437e-b1b3-800660890d44"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[第１条]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="70" y="0" width="485" height="42" uuid="ebe4ff9e-83b8-4799-ae80-f2b6a7dbb342"/>
+				<textElement>
+					<font size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["　株式会社東日本大震災事業者再生支援機構(以下「乙」という。)は、[" +((!$F{nc_name}.equals("")) ? $F{nc_name} : $F{financial_institution_name})+ "] (以下「甲」という。)から、下記要項により金員を借り受け、これを受領した。"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="39" y="41" width="490" height="20" uuid="4fd62f3c-170f-47bd-97db-82bfabf3df35"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[記]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="58" width="83" height="20" uuid="fa23a9bf-631f-4ddf-8d13-951e1b0dbc16"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[１．金　　額]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="58" width="50" height="20" uuid="be7b8e86-4a7e-4920-9355-048b4f4bbb90"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[総額　金]]></text>
+			</staticText>
+			<textField pattern="#,##0.00円">
+				<reportElement x="165" y="58" width="175" height="20" uuid="29c1c0e9-aba9-47b9-a95b-cdaead6cdf54"/>
+				<textElement>
+					<font size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amount_of_money}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="78" width="83" height="20" uuid="021e7737-8055-4c94-af7d-abc9555e0917"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[２．使　　途]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="120" width="83" height="20" uuid="c93e4c71-b31c-4198-9865-62600471b7e1"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[３．期　　限]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="140" width="83" height="20" uuid="fdb09864-81fe-4692-9c1c-4fee2db31042"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[４．償還方法]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="200" width="83" height="20" uuid="6a31c7bd-1267-4e94-ac21-a9594a022c97"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[５．利　　率]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="220" width="83" height="20" uuid="fe8fd611-cef9-488c-b7d9-5e228c98dd29"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[６．利払期日]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="239" width="83" height="20" uuid="06d85bce-345c-453f-988c-accb4db260fa"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[７．利払方法]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="272" width="83" height="20" uuid="6cdf7b1e-c3cc-4f6c-8e07-f961166a0a0d"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[８．損 害 金]]></text>
+			</staticText>
+			<textField pattern="yyyy/MM/dd">
+				<reportElement x="113" y="120" width="203" height="20" uuid="a521d48f-b959-4226-b412-c920a993c6b4"/>
+				<textElement>
+					<font size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["平成" +($F{maturity_yy}-1988)+"年"+$F{maturity_mm}+"月"+$F{maturity_dd}+"日"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="113" y="140" width="388" height="63" uuid="45345e5c-89f5-406d-a8bb-df0492a29a19"/>
+				<textElement>
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[期限に一括償還する。
+また、本契約証書にかかる債権について償還を受けようとする者は、償還を受けるための振込口座等必要な情報を償還期限の５営業日前の日までに乙に届け出るものとする。]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="200" width="15" height="20" uuid="78d9e52f-44fe-4b8f-ab26-ac12e0938fd4"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[年]]></text>
+			</staticText>
+			<textField pattern="###0.000">
+				<reportElement x="128" y="200" width="100" height="20" uuid="b458d09b-5864-4b90-b531-209288ebc2d1"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new BigDecimal($F{interest_rate}).setScale(3, RoundingMode.FLOOR) +" %"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="113" y="220" width="203" height="20" uuid="0cb337ce-f998-43ec-b29c-1a371ba5e69a"/>
+				<textElement>
+					<font size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["平成" +($F{maturity_yy}-1988)+"年"+$F{maturity_mm}+"月"+$F{maturity_dd} +"日"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="354" y="219" width="100" height="20" uuid="ac2e3048-6a22-4fce-9d94-76be2fa61926"/>
+				<text><![CDATA[平成xx年xx月xx日]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="239" width="388" height="35" uuid="e3cad6bf-f4a9-47c2-9641-5fd8302e50ef"/>
+				<textElement>
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[償還日を期限に、借入日の翌日から償還日までの間に生じた利息を後払いする（但し、３６５日の日割計算とする。）。]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="272" width="388" height="30" uuid="1d000c31-8440-420d-bc52-b48ad1907976"/>
+				<textElement>
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[債務不履行の場合には、乙は弁済すべき金額に対し、年６％の割合にあたる損害金（但し、３６５日の日割計算とする。）を支払う。]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="302" width="48" height="20" uuid="b60b0727-7ab0-4c03-ae87-9ae38518df73"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[第２条]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="346" width="48" height="20" uuid="9af54da1-13b4-47e3-8e14-216430c23101"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[第３条]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="376" width="48" height="20" uuid="69e2623e-79a2-4007-b7e6-021c78d269e1"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[第４条]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="395" width="48" height="20" uuid="e24bd009-47c8-42cd-b61e-ce0855498396"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[第５条]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="467" width="48" height="20" uuid="238a090a-73d9-4dcc-ad60-d5f956dd3ffc"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[第６条]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="346" width="435" height="44" uuid="ae8ca659-5819-4478-acdb-a6244044cda1"/>
+				<textElement>
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[　本契約証書の作成その他この契約に関する一切の費用は、乙がこれを負担する
+ものとする。]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="376" width="447" height="20" uuid="40d46cc6-2938-499d-9e88-9034debda51e"/>
+				<textElement>
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[　この契約を証するため証書1通を作成し、乙は甲に交付し甲はこれを保有する。]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="395" width="450" height="81" uuid="8b12bf4a-d822-43a5-9776-4d8b37fe65ff"/>
+				<textElement>
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[　本契約証書にかかる債権の譲渡又は質入れは、借入日から償還期限の5営業日前の日までに行うものとする（なお、事務処理の都合上、譲渡又は質入れを行う場合には、予め譲渡又は質入れを行う日及び相手方を乙までご連絡願いたい。）。
+　また、本契約証書にかかる債権の譲渡又は質入れを行う場合には、遅滞なく、乙に対し承諾の申請又は通知を行うものとする。
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="468" width="460" height="47" uuid="0a1ecf76-c512-4f7c-bdb4-de7a6208c83f"/>
+				<textElement>
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[　この契約に定められた事項について、変更の必要若しくは疑義が生じた場合又はこの契約により難い事由が生じた場合は、その都度甲及び乙はこれに関して協議して定める。]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="436" y="498" width="63" height="20" uuid="32f0874f-eb8e-4d2d-8b7f-e630be703e12"/>
+				<textElement>
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[以　　上]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="535" width="503" height="57" uuid="48ea9e33-4aa6-4786-8680-9ee20b284858"/>
+				<textElement>
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[日本国政府は、この契約に基づき乙が負担する債務の元金及び利息の支払いにつき、これを保証する。]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="27" y="572" width="116" height="20" uuid="3fc88d83-02b9-4156-9b7c-c5b5ab46e878"/>
+				<textElement>
+					<font size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["平成" +($F{drawer_yy}-1988)+"年"+$F{drawer_mm}+"月"+$F{drawer_dd}+"日"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="113" y="78" width="341" height="42" uuid="c82fdcb8-f3ab-425d-af09-a0ea1a275cce"/>
+				<textFieldExpression><![CDATA[$F{horei01}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="54" y="302" width="447" height="44" uuid="c3c56cd3-501b-42b5-8287-d9df79e242ba"/>
+				<textFieldExpression><![CDATA["　この契約に基づき、乙が負担する債務の元金及び利息の支払いは、" + $F{horei02} + "に基づき、日本国政府により保証される。"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="39" y="1" width="66" height="48" uuid="0eb544bc-b5b4-4d1b-8b62-e6dd71c0bde6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[収　　入
+印　　紙]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="187" y="1" width="312" height="34" uuid="3e5fda45-82cf-4ed0-bd78-ee61a295af7e"/>
+				<textFieldExpression><![CDATA[$F{minister_of_finance}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="2" splitType="Stretch"/>
+	</summary>
+</jasperReport>

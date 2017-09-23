@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BillApplicationFormList3" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="951b91da-d5f9-4bb1-a2a0-04efc7166e02">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CurrentDateTime" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[SELECT bill_credit_application_datas2.department_code,
+bill_credit_application_datas2.department_name,
+bill_credit_application_datas2.bank_code,
+bill_credit_application_datas2.financial_institution_name,
+name_conversions.financial_institution_name nc_name,
+bill_credit_application_datas2.successful_bid_interest_rate,
+bill_credit_application_datas2.successful_bid_price,
+bill_credit_application_datas2.bill_number,
+substr(bill_credit_application_datas2.drawer_date,7)  AS drawer_yy, substr(bill_credit_application_datas2.drawer_date,4,2)  AS drawer_mm, substr(bill_credit_application_datas2.drawer_date,1,2) AS drawer_dd,
+substr(bill_credit_application_datas2.maturity_date,7)  AS maturity_yy, substr(bill_credit_application_datas2.maturity_date,4,2) AS maturity_mm, substr(bill_credit_application_datas2.maturity_date,1,2) AS maturity_dd,
+bill_credit_application_datas2.number_of_days,
+bill_credit_application_datas2.interest_rate,
+bill_credit_application_datas2.amount_of_money,
+bill_credit_application_datas2.interest_amount,
+bill_credit_application_datas2.remarks,
+bill_credit_application_datas2.account_number
+FROM bill_credit_application_datas2 LEFT JOIN name_conversions ON bill_credit_application_datas2.bank_code = name_conversions.bank_code]]>
+	</queryString>
+	<field name="department_code" class="java.lang.Object"/>
+	<field name="department_name" class="java.lang.Object"/>
+	<field name="bank_code" class="java.lang.Object"/>
+	<field name="financial_institution_name" class="java.lang.Object"/>
+	<field name="nc_name" class="java.lang.Object"/>
+	<field name="successful_bid_interest_rate" class="java.lang.Object"/>
+	<field name="successful_bid_price" class="java.lang.Object"/>
+	<field name="bill_number" class="java.lang.Object"/>
+	<field name="drawer_yy" class="java.lang.Integer"/>
+	<field name="drawer_mm" class="java.lang.Integer"/>
+	<field name="drawer_dd" class="java.lang.Integer"/>
+	<field name="maturity_yy" class="java.lang.Integer"/>
+	<field name="maturity_mm" class="java.lang.Integer"/>
+	<field name="maturity_dd" class="java.lang.Integer"/>
+	<field name="number_of_days" class="java.lang.Object"/>
+	<field name="interest_rate" class="java.lang.Object"/>
+	<field name="amount_of_money" class="java.lang.Object"/>
+	<field name="interest_amount" class="java.lang.Object"/>
+	<field name="remarks" class="java.lang.Object"/>
+	<field name="account_number" class="java.lang.Object"/>
+	<variable name="sum_of_amount_of_money" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{amount_of_money}]]></variableExpression>
+	</variable>
+	<variable name="sum_of_interest_amount" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{interest_amount}]]></variableExpression>
+	</variable>
+	<variable name="sum_of_total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{amount_of_money}+$F{interest_amount}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="335" y="0" width="224" height="45" uuid="d416329a-1ffb-4b9f-affd-aa2df77a00b5"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[手形借入一覧表]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="58" width="167" height="20" uuid="876bba52-713c-40c3-a068-eb7fdc5b1a3d"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="1" width="115" height="25" uuid="d4701b0a-a78e-4903-8be0-0be91733eedc"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[金融機関]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="117" y="1" width="45" height="25" uuid="67b1537c-7008-4f79-b14a-f47164d1fb28"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[手形番号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="163" y="1" width="68" height="25" uuid="60f8f615-430e-49dc-b973-7536df2f2d5d"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[振出日]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="233" y="1" width="63" height="25" uuid="1a2d6070-8c89-4774-88bd-7adbaef6dbec"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[満期日]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="298" y="1" width="100" height="25" uuid="0d0cef30-991e-4b74-af25-acf678e50c19"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[手形金額（円）]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="1" width="40" height="25" uuid="8cef28b4-2240-4bd9-a7f5-da7b7da2c3f0"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[日数]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="443" y="1" width="48" height="25" uuid="32b6f907-2155-4a23-83a0-31a156ecc545"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[利率]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="493" y="1" width="125" height="25" uuid="81144935-35ca-47b3-b04d-aa3a5bc3fac8"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[利息額（円）]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="619" y="1" width="131" height="25" uuid="fce75963-7bc6-487f-a6e4-6f7dc5182895"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[元利合計額（円）]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="752" y="1" width="50" height="25" uuid="6dca26ce-2ee9-4f04-9bbd-da1b828c02d8"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[備考]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="1" width="802" height="1" uuid="4c2e75d8-3740-4db7-ba19-ba851544d89b"/>
+			</line>
+			<line>
+				<reportElement x="0" y="26" width="802" height="1" uuid="154ffef0-3ce1-4023-9aaa-cf6b1a0006e9"/>
+			</line>
+			<line>
+				<reportElement x="801" y="0" width="1" height="27" uuid="e3436846-8f40-497b-aa45-27fb0c47f61c"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="27" uuid="be9df91d-2238-4408-a238-d2d752061673"/>
+			</line>
+			<line>
+				<reportElement x="115" y="0" width="1" height="27" uuid="0c307197-4cdf-4175-a7d8-fb966831ff9f"/>
+			</line>
+			<line>
+				<reportElement x="231" y="0" width="1" height="27" uuid="ff4b0696-2a61-403f-945e-51eee5691cd2"/>
+			</line>
+			<line>
+				<reportElement x="297" y="0" width="1" height="27" uuid="dabd12a4-767f-4595-8b8e-710b93a52654"/>
+			</line>
+			<line>
+				<reportElement x="399" y="0" width="1" height="27" uuid="241f6575-cd22-4082-8c7d-f4f427a02c47"/>
+			</line>
+			<line>
+				<reportElement x="442" y="0" width="1" height="27" uuid="cc7591c6-4ac3-4d2e-90e7-c9a286674dab"/>
+			</line>
+			<line>
+				<reportElement x="491" y="0" width="1" height="27" uuid="f9c9dbac-4cb4-40b3-b165-069b5ba0ce50"/>
+			</line>
+			<line>
+				<reportElement x="618" y="0" width="1" height="27" uuid="08567639-9df3-43ea-bb9d-33cb1b6f3197"/>
+			</line>
+			<line>
+				<reportElement x="749" y="0" width="1" height="27" uuid="e15874e8-ae6e-4794-9515-dde1b8d4d5c8"/>
+			</line>
+			<line>
+				<reportElement x="162" y="0" width="1" height="27" uuid="7059e8d7-61af-426a-9a02-33b57d266d24"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement x="3" y="0" width="112" height="25" uuid="02d395f9-55ac-498c-aaeb-e1abd51a58c1"/>
+				<textFieldExpression><![CDATA[$F{financial_institution_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="117" y="0" width="47" height="25" uuid="9cee4727-17ee-4815-98d7-7f7b04d5ec99"/>
+				<textFieldExpression><![CDATA[$F{bill_number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="164" y="0" width="65" height="25" uuid="e0da304a-2b87-45aa-aa29-8417e87df354"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[($F{drawer_yy} - 1988) +"."+ $F{drawer_mm} +"."+ $F{drawer_dd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="233" y="0" width="63" height="25" uuid="301911f6-820c-43ca-94b3-f4350c6be6f3"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[($F{maturity_yy}-1988) +"."+ $F{maturity_mm} +"."+ $F{maturity_dd}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="300" y="0" width="98" height="25" uuid="088f16a3-8b09-4729-a0c2-31cbb106995b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{amount_of_money}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="402" y="0" width="38" height="25" uuid="991ad253-4f0b-4bc9-a34b-3bdcb3f2d715"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{number_of_days}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000 %">
+				<reportElement x="445" y="0" width="46" height="25" uuid="7f2f2c9f-5722-4051-8ba8-88525f8fc973"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new BigDecimal($F{interest_rate}).setScale(3, RoundingMode.FLOOR) +" %"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="494" y="0" width="124" height="25" uuid="2553a48b-7928-4369-b530-087aceddf162"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{interest_amount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="619" y="0" width="130" height="25" uuid="e6346f16-887a-4fa6-8085-1fcd858cd238"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{amount_of_money} + $F{interest_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="749" y="0" width="52" height="25" uuid="19a7f81c-9c48-49a7-822d-f4eed60b774d"/>
+				<textFieldExpression><![CDATA[($F{remarks} ? "" : $F{remarks} )]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="25" width="802" height="1" uuid="e3cc95f1-723a-4cde-9c0f-505fa1b0bf6f"/>
+			</line>
+			<line>
+				<reportElement x="801" y="-1" width="1" height="27" uuid="8d14e5e6-c675-4970-9961-f403ed88b85f"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="27" uuid="d1e47921-179c-4d65-94ac-c3b520d5eed8"/>
+			</line>
+			<line>
+				<reportElement x="115" y="0" width="1" height="27" uuid="fc4390ce-1c55-4a62-8aa0-2f657dc7f6e9"/>
+			</line>
+			<line>
+				<reportElement x="162" y="0" width="1" height="27" uuid="c5a5a6e7-f2b2-49d0-88d1-2647ba3e15cc"/>
+			</line>
+			<line>
+				<reportElement x="231" y="0" width="1" height="27" uuid="18630db2-4ef7-4aec-9b1f-2a470240ebbb"/>
+			</line>
+			<line>
+				<reportElement x="297" y="0" width="1" height="27" uuid="f58968b8-60fc-42c6-82a7-83b66cf55c76"/>
+			</line>
+			<line>
+				<reportElement x="399" y="0" width="1" height="27" uuid="772e111c-6abc-4873-becd-df24641f1f82"/>
+			</line>
+			<line>
+				<reportElement x="442" y="0" width="1" height="27" uuid="e07e1597-e668-43ed-8030-d3f06f8f4cbc"/>
+			</line>
+			<line>
+				<reportElement x="491" y="0" width="1" height="27" uuid="56f76318-ba0f-48e4-860b-26e6e8bfdaec"/>
+			</line>
+			<line>
+				<reportElement x="618" y="0" width="1" height="27" uuid="9cc506b1-ed41-4688-abb1-4f7344a975c4"/>
+			</line>
+			<line>
+				<reportElement x="749" y="0" width="1" height="27" uuid="af8d0986-3977-435e-9a8c-091d3b4771d7"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="11" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="15" y="3" width="100" height="20" uuid="62c5c160-08e0-427c-bd15-8e3ba0a04152"/>
+				<textFieldExpression><![CDATA[$P{CurrentDateTime}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="701" y="0" width="100" height="20" uuid="d0eee8be-1858-494a-bd8e-3651dcc0efad"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER} + " ページ"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="0" width="100" height="20" uuid="f22a050f-1a9a-44c5-97df-2e24d177424a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER} +" / "]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="27" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement x="297" y="0" width="101" height="25" uuid="ae119909-1a49-44a4-8ec1-c9149dfb71cf"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{sum_of_amount_of_money}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="492" y="0" width="126" height="25" uuid="17cbd5bc-d2e6-4aea-9740-788778fbb11c"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{sum_of_interest_amount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="619" y="0" width="130" height="25" uuid="1ca49af1-1eb9-4a5e-a902-d517078b1313"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{sum_of_total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="272" y="0" width="21" height="24" uuid="9fcbc405-0272-47eb-b350-1dfb3f7c929e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[計]]></text>
+			</staticText>
+			<line>
+				<reportElement x="296" y="24" width="104" height="1" uuid="7c613425-5756-4cb3-bae1-a1aa102c1789"/>
+			</line>
+			<line>
+				<reportElement x="492" y="24" width="126" height="1" uuid="6281b0a5-29d4-4631-ae9a-fc857bedf93b"/>
+			</line>
+			<line>
+				<reportElement x="399" y="0" width="1" height="25" uuid="42f31dde-a23d-44e7-a726-763e8d40f7c2"/>
+			</line>
+			<line>
+				<reportElement x="297" y="0" width="1" height="25" uuid="2d8d4c75-8d7a-4740-94c2-5497a8faa908"/>
+			</line>
+			<line>
+				<reportElement x="491" y="0" width="1" height="25" uuid="f7454225-391f-4f1c-89a6-597c281a77d8"/>
+			</line>
+			<line>
+				<reportElement x="618" y="0" width="1" height="25" uuid="d4bed248-bcd7-441a-b43e-6e0273d862b1"/>
+			</line>
+			<line>
+				<reportElement x="617" y="24" width="132" height="1" uuid="9e49256e-31e0-423e-9500-d9dd46f7e3ff"/>
+			</line>
+			<line>
+				<reportElement x="749" y="0" width="1" height="25" uuid="3840c3d7-5498-402d-bb41-f6c84196456c"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

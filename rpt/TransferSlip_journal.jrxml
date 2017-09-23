@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TransferSlip_journal" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="20d51deb-fc43-4695-b991-7a2f8289b884">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="journal_no" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="slip_no" class="java.lang.Integer" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[SELECT * FROM journal_search_results
+WHERE journal_number =  $P{journal_no} AND slip_number = $P{slip_no}]]>
+	</queryString>
+	<field name="journal_number" class="java.lang.Object"/>
+	<field name="slip_number" class="java.lang.Object"/>
+	<field name="row_number" class="java.lang.Object"/>
+	<field name="department_code" class="java.lang.Object"/>
+	<field name="department_name" class="java.lang.Object"/>
+	<field name="debit_item_code" class="java.lang.Object"/>
+	<field name="debit_item_name" class="java.lang.Object"/>
+	<field name="debit_details_code" class="java.lang.Object"/>
+	<field name="debit_details_name" class="java.lang.Object"/>
+	<field name="credit_course_code" class="java.lang.Object"/>
+	<field name="credit_course_name" class="java.lang.Object"/>
+	<field name="credit_specific_code" class="java.lang.Object"/>
+	<field name="credit_specific_name" class="java.lang.Object"/>
+	<field name="recorded_year" class="java.lang.Object"/>
+	<field name="recorded_month" class="java.lang.Object"/>
+	<field name="recorded_date" class="java.lang.Object"/>
+	<field name="debit_amount" class="java.lang.Object"/>
+	<field name="credit_amount" class="java.lang.Object"/>
+	<field name="balance_amount" class="java.lang.Object"/>
+	<field name="abstract_code" class="java.lang.Object"/>
+	<field name="abstract_name" class="java.lang.Object"/>
+	<field name="processing_time" class="java.lang.Object"/>
+	<field name="debit_consumption_tax_classification" class="java.lang.Object"/>
+	<field name="credit_consumption_tax_classification" class="java.lang.Object"/>
+	<field name="customer_code" class="java.lang.Object"/>
+	<field name="customer_name" class="java.lang.Object"/>
+	<field name="type_size" class="java.lang.Object"/>
+	<variable name="sum_of_debit_amount" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{debit_amount}]]></variableExpression>
+	</variable>
+	<variable name="sum_of_credit_amount" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{credit_amount}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="45" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement x="1" y="1" width="138" height="25" uuid="84f988a1-beab-4287-a092-b08e8ba354f6"/>
+				<textElement textAlignment="Right">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{debit_amount}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="142" y="1" width="140" height="25" uuid="bf3d0431-3d09-443e-9423-3c6c32250b08"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{debit_item_name} +" "+($F{debit_details_name}? $F{debit_details_name} : " ")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="285" y="1" width="234" height="25" uuid="d82c7a46-30b0-4fb8-b7e1-5832cb686e63"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{abstract_name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="523" y="1" width="136" height="25" uuid="2d1a5336-81eb-42cf-bb42-0c14116e9b34"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{credit_course_name} +" "+($F{credit_specific_name}? $F{credit_specific_name} : " " )]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="662" y="1" width="138" height="25" uuid="e3b7dd5e-bbcf-42e9-a973-f7758fae0dd2"/>
+				<textElement textAlignment="Right">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{credit_amount}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="285" y="24" width="234" height="20" uuid="ef8e028d-07ef-4e3e-9272-9cb8c029ecba"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customer_name}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="26" width="280" height="1" uuid="66440e00-e23b-4833-b7fe-2eebc0631b4a"/>
+			</line>
+			<line>
+				<reportElement x="140" y="0" width="1" height="27" uuid="0db7c51c-4864-4e4d-8d4f-fbad2bff38b2"/>
+			</line>
+			<line>
+				<reportElement x="1" y="0" width="1" height="27" uuid="8e973558-86ba-4d38-b4ef-87ad96804c8f"/>
+			</line>
+			<line>
+				<reportElement x="660" y="0" width="1" height="27" uuid="512638ff-5e53-42c4-904b-9ea98df51ff1"/>
+			</line>
+			<line>
+				<reportElement x="800" y="0" width="1" height="27" uuid="74b82c2f-3b4b-47ec-ba89-6f91d2d5e267"/>
+			</line>
+			<line>
+				<reportElement x="521" y="26" width="280" height="1" uuid="a8288054-f739-4618-bb61-40bdbc9d197a"/>
+			</line>
+			<line>
+				<reportElement x="521" y="0" width="1" height="44" uuid="7f949f5a-18a3-440b-91e2-0128f08ae3e5"/>
+			</line>
+			<line>
+				<reportElement x="282" y="0" width="1" height="44" uuid="a66b1451-3acb-41cd-9f57-f16c21529b16"/>
+			</line>
+			<line>
+				<reportElement x="1" y="44" width="800" height="1" uuid="e977fc0c-81e2-4445-b16f-fe186559f818"/>
+			</line>
+		</band>
+	</detail>
+	<summary>
+		<band height="27" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement x="1" y="2" width="138" height="25" uuid="375c8ffc-1ff2-4795-9fca-91918b7034e2"/>
+				<textElement textAlignment="Right">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum_of_debit_amount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="661" y="2" width="138" height="25" uuid="1a1edb3c-f131-4275-8283-9b4b4f242485"/>
+				<textElement textAlignment="Right">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum_of_credit_amount}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="801" height="26" uuid="797905fc-ea8b-45b8-b1e2-0cd6a65a20a0"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="283" y="1" width="236" height="25" uuid="6508d080-a46a-4c33-95cb-d5dd3a4e8a49"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[合　　　　　　　　　　　　　　　　　計]]></text>
+			</staticText>
+			<line>
+				<reportElement x="659" y="0" width="1" height="26" uuid="58c50830-414d-414b-b5d9-02525eec2af1"/>
+			</line>
+			<line>
+				<reportElement x="140" y="0" width="1" height="26" uuid="3f1d6f59-5408-474d-b4a8-598d4d421469"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Financialinstitute" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" scriptletClass="net.sf.jasperreports.engine.JRDefaultScriptlet" uuid="db662031-b1cc-438e-9938-20679756bf14">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CurrentDateTime" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="bidDate" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["21-04-2016"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT bid_datas2.department_code, bid_datas2.department_name, bid_datas2.business_category, name_conversions.financial_institution_name bank_name,
+bid_datas2.financial_institution_name, bid_datas2.bank_code,bid_datas2.bid_number,bid_datas2.bid_interest_rate,bid_datas2.bid_amount_money
+ FROM bid_datas2 LEFT JOIN name_conversions ON bid_datas2.bank_code = name_conversions.bank_code
+WHERE ((bid_datas2.auction_date) = $P{bidDate}) order by bid_datas2.bank_code;]]>
+	</queryString>
+	<field name="department_code" class="java.lang.Object"/>
+	<field name="department_name" class="java.lang.Object"/>
+	<field name="business_category" class="java.lang.Object"/>
+	<field name="bank_name" class="java.lang.Object"/>
+	<field name="financial_institution_name" class="java.lang.Object"/>
+	<field name="bank_code" class="java.lang.Object"/>
+	<field name="bid_number" class="java.lang.Object"/>
+	<field name="bid_interest_rate" class="java.lang.Double"/>
+	<field name="bid_amount_money" class="java.lang.Double"/>
+	<variable name="Financial_institutions_meter" class="java.lang.Float" resetType="Group" resetGroup="bankCodeGroup" calculation="Sum">
+		<variableExpression><![CDATA[($F{bid_interest_rate} * $F{bid_amount_money} * 100000000)]]></variableExpression>
+	</variable>
+	<variable name="amount_total" class="java.lang.Double" resetType="Group" resetGroup="bankCodeGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{bid_amount_money}]]></variableExpression>
+	</variable>
+	<variable name="summary_amount_money" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{bid_amount_money}]]></variableExpression>
+	</variable>
+	<variable name="summary_interest_rate" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{bid_interest_rate} * $F{bid_amount_money} * 100000000]]></variableExpression>
+	</variable>
+	<variable name="Matter_count" class="java.lang.Integer" resetType="None" incrementType="Group" incrementGroup="bankCodeGroup" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{bank_code}]]></variableExpression>
+	</variable>
+	<variable name="summary_amounts_money2" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{bid_amount_money} * 100000000]]></variableExpression>
+	</variable>
+	<variable name="Financial_amount_meter" class="java.lang.Float" resetType="Group" resetGroup="bankCodeGroup" calculation="Sum">
+		<variableExpression><![CDATA[($F{bid_amount_money} * 100000000)]]></variableExpression>
+	</variable>
+	<group name="bankCodeGroup">
+		<groupExpression><![CDATA[$F{bank_code}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band height="38">
+				<textField pattern="###0.000" isBlankWhenNull="true">
+					<reportElement x="319" y="2" width="100" height="20" uuid="8fb502b9-6e14-40d9-9bf8-1f66a6c9da67"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[new BigDecimal($V{Financial_institutions_meter} / $V{Financial_amount_meter}).setScale(3, BigDecimal.ROUND_HALF_UP) +" %"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="48" y="2" width="214" height="20" uuid="e9fa2890-5245-4909-823b-1675c5d25edd"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[金融機関　計]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="1" width="1" height="37" uuid="d05e739d-2a3b-4097-b48c-49677090bacd"/>
+				</line>
+				<line>
+					<reportElement x="45" y="1" width="1" height="37" uuid="003ea654-26ea-4684-91c1-6c22b5d28f63"/>
+				</line>
+				<line>
+					<reportElement x="261" y="0" width="1" height="37" uuid="dc04e4f1-f652-4afa-91b9-9efe26ea3869"/>
+				</line>
+				<line>
+					<reportElement x="0" y="37" width="555" height="1" uuid="eaad0b6a-b4dd-4505-9490-aa72df0ba396"/>
+				</line>
+				<line>
+					<reportElement x="422" y="0" width="1" height="37" uuid="6c637840-89ab-4d9c-91db-b38e9a40ec07"/>
+				</line>
+				<line>
+					<reportElement x="303" y="0" width="1" height="37" uuid="4b34f69f-e3d9-4986-b602-89008e476060"/>
+				</line>
+				<line>
+					<reportElement x="554" y="0" width="1" height="37" uuid="63e0e1c5-d11f-4b04-a9a8-25eefd2c6371"/>
+				</line>
+				<line>
+					<reportElement x="0" y="1" width="555" height="1" uuid="a3c6e350-5769-46f2-a427-d5d1996393b8"/>
+				</line>
+				<textField pattern="###0 億円">
+					<reportElement x="433" y="2" width="113" height="20" uuid="4f5a1999-c6aa-408c-bd62-2080d6af0499"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{amount_total}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="13" width="262" height="37" uuid="19a240a0-b426-49d1-beab-4bd354d928cb"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[金融機関別入札状況表]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="1" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="46" y="1" width="214" height="34" uuid="5ede6298-74fd-4708-8de1-95e7dd952029"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[金　融　機　関]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="1" width="118" height="34" uuid="3926de97-0ab1-4543-8d1d-6541435ba75e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[入札利率]]></text>
+			</staticText>
+			<line>
+				<reportElement x="45" y="0" width="1" height="38" uuid="313a05be-ee31-40aa-b555-ec58596a5a3f"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="33" height="1" uuid="3127c577-7e95-41a3-b123-82380c15d602"/>
+			</line>
+			<staticText>
+				<reportElement x="423" y="1" width="131" height="34" uuid="ea62baf6-485d-4dd9-95ec-eacaa6266d0f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[入札金額]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="66361100-3949-4a09-8290-2591496bbd4d"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="37" uuid="58e2c2dc-9211-44bf-9b1b-f8b4523d73b9"/>
+			</line>
+			<line>
+				<reportElement x="1" y="37" width="555" height="1" uuid="754c492b-6984-4c48-bce3-b6fac60535df"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="37" uuid="361ace24-4a1b-44e9-a7ea-1eff0beba5ac"/>
+			</line>
+			<line>
+				<reportElement x="422" y="0" width="1" height="37" uuid="8edc5491-f72c-4173-a2c3-13fb65ee28b9"/>
+			</line>
+			<line>
+				<reportElement x="303" y="0" width="1" height="37" uuid="9fa75058-424e-4476-b237-95e0815d5e36"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="0" width="45" height="34" uuid="8d638fae-ff12-44af-8e8a-01ce7d81ad3f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[業態]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="1" height="21" uuid="019b5c40-68fa-469e-a63b-6d1996c805b3"/>
+			</line>
+			<line>
+				<reportElement x="422" y="-3" width="1" height="23" uuid="20fbf70b-1dad-40f1-9353-a1dd447f4ded"/>
+			</line>
+			<line>
+				<reportElement x="303" y="-1" width="1" height="21" uuid="d2dd14c4-e6d1-495f-87aa-21962925024b"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="21" uuid="94241123-78ad-4daa-abba-491078076dbc"/>
+			</line>
+			<line>
+				<reportElement x="45" y="0" width="1" height="21" uuid="f0cbc38d-5cf3-40cc-8b7c-91da6db82a1c"/>
+			</line>
+			<line>
+				<reportElement x="261" y="-1" width="1" height="21" uuid="ec449213-ff8c-4681-8732-af0cb321ed1f"/>
+			</line>
+			<textField pattern="###0 億円" isBlankWhenNull="true">
+				<reportElement x="431" y="0" width="115" height="20" uuid="edfb8f25-87f6-4659-8919-5e637e2c2de6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[( $F{bid_amount_money}!=0? $F{bid_amount_money} : "" )]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.000" isBlankWhenNull="true">
+				<reportElement x="305" y="1" width="114" height="20" uuid="c4eee570-81b1-4628-b354-fa1d5a31e077"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[( $F{bid_interest_rate}== 0.0 ? "" : new java.text.DecimalFormat("0.000").format($F{bid_interest_rate}) +" %" )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="119" y="1" width="141" height="20" uuid="6f122318-ae9e-40b8-b380-83e82c63faa3"/>
+				<textFieldExpression><![CDATA[$F{bank_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="49" y="1" width="60" height="20" uuid="cd076acd-4f32-4e0b-b033-16e99895c13d"/>
+				<textFieldExpression><![CDATA[$F{bank_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="1" width="43" height="20" uuid="7a785e24-c478-41fc-853f-5ac95cf47b50"/>
+				<textFieldExpression><![CDATA[$F{business_category}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="264" y="1" width="33" height="20" uuid="bd8e7a9e-028e-4fc9-aef7-92ef1171ecda"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{bid_number}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="350" y="0" width="143" height="21" uuid="d1894467-59e6-4ffa-b2a9-fd014b7026c7"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[入札金融機関数]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="493" y="1" width="25" height="20" uuid="d476687d-9c05-4878-ab7e-9c4724ae20d1"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{Matter_count}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="519" y="1" width="35" height="20" uuid="74fc7b66-6f7c-4759-a92a-d027a7fca27a"/>
+				<text><![CDATA[件]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="8" width="100" height="20" uuid="03f2ec53-0a41-4402-bcbf-62ab655a9bc2"/>
+				<textFieldExpression><![CDATA[$P{CurrentDateTime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="409" y="8" width="100" height="20" uuid="14fa122d-e0c9-4895-a2b9-a7b193514187"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER} +" / "+ $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="513" y="8" width="40" height="20" uuid="d7709a97-d0e7-4429-808a-99536d042b52"/>
+				<text><![CDATA[ページ]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="1" height="42" uuid="43f5929f-99b7-4369-998f-f3dc628c0b1a"/>
+			</line>
+			<line>
+				<reportElement x="0" y="41" width="555" height="1" uuid="a97b4df2-8950-4e28-8480-7652c460747e"/>
+			</line>
+			<line>
+				<reportElement x="45" y="0" width="1" height="42" uuid="6015fbd4-767e-45cb-b632-e851ab649457"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="42" uuid="c9a5c007-5dc5-41f6-ab0a-db89dd1486a1"/>
+			</line>
+			<line>
+				<reportElement x="261" y="0" width="1" height="42" uuid="065f3ab5-1818-4d3e-9fc1-8adf55751c68"/>
+			</line>
+			<line>
+				<reportElement x="303" y="0" width="1" height="42" uuid="408076d4-d6b8-4525-83db-08f2e7304fea"/>
+			</line>
+			<line>
+				<reportElement x="422" y="0" width="1" height="42" uuid="ded6ed28-e532-4846-b19c-bc170fdb2980"/>
+			</line>
+			<textField pattern="###0 億円">
+				<reportElement x="437" y="1" width="109" height="20" uuid="ccdbdbcc-b3f9-433c-b4b0-d9fb817e0b32"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{summary_amount_money}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="49" y="0" width="214" height="21" uuid="a5767034-7b53-40d8-8036-d25e43b1ef35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[総合計]]></text>
+			</staticText>
+			<textField pattern="###0.000">
+				<reportElement x="319" y="0" width="100" height="20" uuid="43c0beba-ed99-4340-bb16-1e062071a40e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("0.000").format($V{summary_interest_rate} / $V{summary_amounts_money2}) + " %"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

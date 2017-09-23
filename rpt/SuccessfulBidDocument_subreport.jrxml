@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SuccessfulBidDocument_subreport" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="df849ba8-f34c-48d2-8b06-4d8442bb3e6a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="bank_code" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[0001]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dept_code" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="auction_date" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[SELECT DISTINCT successful_bid_datas_3.department_code,divisions.department_name, successful_bid_datas_3.business_category, successful_bid_datas_3.bank_code, successful_bid_datas_3.financial_institution_name,
+CASE WHEN successful_bid_datas_3.bid_number > 10 THEN '合計' ELSE successful_bid_datas_3.bid_number END AS bid_number1,
+successful_bid_datas_3.bid_interest_rate, successful_bid_datas_3.bid_amount_money, successful_bid_datas_3.successful_bid_interest_rate,
+successful_bid_datas_3.successful_bid_price
+FROM (successful_bid_datas_3 LEFT JOIN divisions ON successful_bid_datas_3.department_code = divisions.department_code) INNER JOIN bid_datas ON (successful_bid_datas_3.department_code = bid_datas.department_code) AND (successful_bid_datas_3.bank_code = bid_datas.bank_code) AND (successful_bid_datas_3.auction_date = bid_datas.auction_date)
+WHERE (((successful_bid_datas_3.department_code) = $P{dept_code}) AND ((successful_bid_datas_3.financial_institution_name) <> '合  計') AND ((successful_bid_datas_3.auction_date) = $P{auction_date}) AND ((bid_datas.flag1) = '1') AND successful_bid_datas_3.bank_code =$P{bank_code});]]>
+	</queryString>
+	<field name="department_code" class="java.lang.Object"/>
+	<field name="department_name" class="java.lang.Object"/>
+	<field name="business_category" class="java.lang.Object"/>
+	<field name="bank_code" class="java.lang.Object"/>
+	<field name="financial_institution_name" class="java.lang.Object"/>
+	<field name="bid_number1" class="java.lang.Object"/>
+	<field name="bid_interest_rate" class="java.lang.Object"/>
+	<field name="bid_amount_money" class="java.lang.Object"/>
+	<field name="successful_bid_interest_rate" class="java.lang.Object"/>
+	<field name="successful_bid_price" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="34" splitType="Stretch">
+			<line>
+				<reportElement x="176" y="1" width="1" height="33" uuid="1583cd50-b3f5-47ed-97ae-9a1cfbd9dc79"/>
+			</line>
+			<line>
+				<reportElement x="326" y="1" width="1" height="33" uuid="267a730f-600b-45ef-ad1b-b66f8755ccc2"/>
+			</line>
+			<line>
+				<reportElement x="0" y="1" width="325" height="1" uuid="a247c3e2-a48d-4f92-a139-d7427c871804"/>
+			</line>
+			<textField pattern="###0 億円">
+				<reportElement x="176" y="4" width="148" height="29" uuid="fc8efa57-12de-4557-a4ab-83d9d51cacc2"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{bid_amount_money} ? $F{bid_amount_money} : "")]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="453" y="1" width="1" height="33" uuid="c3377156-7f87-4436-b419-c71563916344"/>
+			</line>
+			<line>
+				<reportElement x="337" y="1" width="217" height="1" uuid="e48a4594-b3ff-498b-9c77-c97dfe84e252"/>
+			</line>
+			<line>
+				<reportElement x="554" y="1" width="1" height="33" uuid="5b708912-04b5-4db0-b04d-06bae36babf7"/>
+			</line>
+			<textField pattern="###0.000" isBlankWhenNull="true">
+				<reportElement x="46" y="4" width="130" height="29" uuid="5e505993-155b-4b5e-bebd-48a7246acdb1"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{bid_interest_rate} ? new BigDecimal($F{bid_interest_rate}).setScale(3, BigDecimal.ROUND_HALF_UP) + " %" : "" )]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0 億円">
+				<reportElement x="456" y="1" width="97" height="32" uuid="6ca147e1-281e-4fd1-a2e6-c8b387e11e23"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{successful_bid_price} ? $F{successful_bid_price} : "" )]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="45" y="1" width="1" height="33" uuid="dd3074e4-288c-4445-9946-91cf06792123"/>
+			</line>
+			<line>
+				<reportElement x="0" y="1" width="1" height="33" uuid="b70c15cc-fc7f-49f5-8020-32a5fa938f15"/>
+			</line>
+			<textField>
+				<reportElement x="11" y="3" width="35" height="30" uuid="df6f8408-f07d-42b1-aac2-1736daf60c60"/>
+				<textFieldExpression><![CDATA[$F{bid_number1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.000">
+				<reportElement x="338" y="3" width="115" height="30" uuid="305e552e-888a-4ec3-86b9-5290e0026064"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{successful_bid_interest_rate} ? new BigDecimal($F{successful_bid_interest_rate}).setScale(3, BigDecimal.ROUND_HALF_UP) + "%" : "" )]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="337" y="1" width="1" height="33" uuid="8cb10751-0794-4f42-841b-0e35cda9a4de"/>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="3">
+			<line>
+				<reportElement x="1" y="0" width="552" height="1" uuid="068ecce7-27e3-4069-a62a-2e4db8b7ee5b"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

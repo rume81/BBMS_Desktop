@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TransferSlip" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a8539265-2798-48f3-ab2f-bfca6a298c62">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["F:\\Workspace\\BBMS\\rpt\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * FROM transfer_slip_reports]]>
+	</queryString>
+	<field name="department_code" class="java.lang.Object"/>
+	<field name="department_name" class="java.lang.Object"/>
+	<field name="journal_number" class="java.lang.Object"/>
+	<field name="slip_number" class="java.lang.Object"/>
+	<field name="recorded_year" class="java.lang.Integer"/>
+	<field name="recorded_month" class="java.lang.Integer"/>
+	<field name="recorded_date" class="java.lang.Integer"/>
+	<field name="abstract_name" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="133" splitType="Stretch">
+			<staticText>
+				<reportElement x="260" y="56" width="298" height="37" uuid="23e637cf-2379-40cd-b1d9-65ca6f5b269b"/>
+				<textElement textAlignment="Center">
+					<font size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[伝票作成依頼書]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="100" width="44" height="25" uuid="bcc96167-5c14-4e16-a80a-7d0ae956106b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[（日付）]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="374" y="100" width="24" height="25" uuid="290d4554-3187-40c2-8df6-21f18f49ed67"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{recorded_year}-1988]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="399" y="100" width="15" height="25" uuid="cc2c82dc-2ef2-42cd-82ce-fe41f689433c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[年]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="414" y="100" width="18" height="25" uuid="35e9f7a8-c80f-44d9-91e1-bbafe22a78ac"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{recorded_month}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="432" y="100" width="17" height="25" uuid="45574cef-0055-4781-b70a-129203065bcf"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[月]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="449" y="100" width="18" height="25" uuid="c9daade9-037e-4e24-9e04-e87d97c072cd"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{recorded_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="467" y="100" width="15" height="25" uuid="c4b1648d-666d-4514-9c10-c7c885e92701"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[日]]></text>
+			</staticText>
+			<line>
+				<reportElement x="564" y="22" width="238" height="1" uuid="2dfe4615-b23a-4211-8ef5-7c8723551da8"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="623" y="1" width="1" height="65" uuid="265e410d-29e3-48b4-8458-eadb224ca3f6"/>
+			</line>
+			<line>
+				<reportElement x="683" y="1" width="1" height="65" uuid="5c0a9f0f-a1ee-442b-b802-5ff0aeb8378b"/>
+			</line>
+			<line>
+				<reportElement x="742" y="1" width="1" height="65" uuid="6bee6a17-fc8b-47ee-9f6b-6065c77066b7"/>
+			</line>
+			<rectangle>
+				<reportElement mode="Transparent" x="565" y="1" width="238" height="65" uuid="45f12e16-44f8-48da-8682-8c38dbcd8aed"/>
+			</rectangle>
+			<line>
+				<reportElement x="253" y="124" width="310" height="1" uuid="f53dc3da-ed87-4087-822f-d8c1c49e48b4"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="1" width="140" height="25" uuid="8379ec7d-8068-4123-afa8-41b0d4054657"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[金　　　　額]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="142" y="1" width="140" height="25" uuid="3d88789a-1fe3-40cb-a187-f438bcbbbaa1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[借　方　科　目]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="1" width="234" height="25" uuid="fda6d518-e91a-4f60-9b61-764441205b24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[摘　　　　　　要]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="521" y="1" width="140" height="25" uuid="cfb6e8ec-05a6-44f6-af20-10b2599c1e49"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[貸　方　科　目]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="662" y="1" width="139" height="25" uuid="c8d6fe2c-9a7b-4fdb-9164-e36dcaa613d4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[金　　　　額]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="25" width="140" height="1" uuid="4a35ded3-6cb7-4bb8-ab16-8e4c390fcce4"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="142" y="25" width="140" height="1" uuid="633fc146-59c6-4aed-a1c6-756293a1b0df"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="285" y="25" width="234" height="1" uuid="c62fcceb-e9aa-468f-b347-ecd385715869"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="521" y="25" width="140" height="1" uuid="fc95ef45-d2d7-4de2-97cb-77fac1760b2a"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="662" y="25" width="140" height="1" uuid="69f3bbd0-9edf-40fe-a816-c79af7db1185"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="801" y="1" width="1" height="25" uuid="954afc66-4f77-469d-b0dc-0a5fe8f0d1f9"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="519" y="1" width="1" height="25" uuid="cb236f2c-bc1b-4655-beec-ea6bac6bbaff"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="282" y="1" width="1" height="25" uuid="9754047a-085f-4f93-8e43-f3dba3602616"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="140" y="1" width="1" height="25" uuid="f812b394-c91b-4cc3-b7cb-67834d75d8c7"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="660" y="1" width="1" height="25" uuid="c40279ac-3d5d-4465-8869-01a27596ceb4"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="521" y="1" width="1" height="25" forecolor="#CCCCCC" uuid="8043541f-44ee-4c5f-97b2-703fd9ac1598"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="662" y="1" width="1" height="25" forecolor="#CCCCCC" uuid="652fc1d5-c5c9-457d-9da4-e69f5c6d09bc"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="285" y="1" width="1" height="25" forecolor="#CCCCCC" uuid="0792d05a-735b-441f-a622-e3913ac70b98"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="142" y="1" width="1" height="25" forecolor="#CCCCCC" uuid="6ca1f096-4e49-44a4-b794-b72ae8d88fb7"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="1" width="1" height="25" forecolor="#CCCCCC" uuid="c8c79cf1-092f-48f6-b552-0414764f913d"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="662" y="1" width="140" height="1" forecolor="#CCCCCC" uuid="a9f4e43f-cb52-48ce-82b6-9886d18f730d"/>
+			</line>
+			<line>
+				<reportElement x="285" y="1" width="234" height="1" forecolor="#CCCCCC" uuid="2be01d4e-d707-45d4-be8a-d04a5f279d3d"/>
+			</line>
+			<line>
+				<reportElement x="0" y="1" width="140" height="1" forecolor="#CCCCCC" uuid="62a6d0cb-6f91-4ab2-bef8-68f94f350d7f"/>
+			</line>
+			<line>
+				<reportElement x="142" y="1" width="140" height="1" forecolor="#CCCCCC" uuid="33f3e44e-b8f2-493f-b465-52050af82a87"/>
+			</line>
+			<line>
+				<reportElement x="521" y="1" width="140" height="1" forecolor="#CCCCCC" uuid="f5867c20-e7ff-4895-a7d5-0970ffaca353"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="200" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="803" height="200" uuid="517eb126-c28f-4848-af27-10e0a525027e"/>
+				<subreportParameter name="slip_no">
+					<subreportParameterExpression><![CDATA[$F{slip_number}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="journal_no">
+					<subreportParameterExpression><![CDATA[$F{journal_number}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"TransferSlip_journal.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="1" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="80" splitType="Stretch">
+			<line>
+				<reportElement x="622" y="10" width="1" height="65" uuid="4ac71e09-34a9-4555-91e3-981df7af1052"/>
+			</line>
+			<line>
+				<reportElement x="741" y="10" width="1" height="65" uuid="1b12cfe0-774c-4e3b-b880-976bd6a7daa0"/>
+			</line>
+			<line>
+				<reportElement x="563" y="31" width="238" height="1" uuid="256e1649-999f-4d68-97fc-e719b9d09639"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<rectangle>
+				<reportElement mode="Transparent" x="563" y="10" width="238" height="65" uuid="1c02b8bf-8c9a-4c88-9e9b-196ef4ced589"/>
+			</rectangle>
+			<line>
+				<reportElement x="682" y="10" width="1" height="65" uuid="60d9cccc-2e77-4eb9-a5af-61df9ecc6d15"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SuccessfulBidDocument" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="80a4828e-02c5-4bf4-89f2-7600e758ec1b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="dept_code" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["010"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="auction_date" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["21-04-2016"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="auctionJp_date" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["F:\\Workspace\\BBMS\\rpt\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT DISTINCT successful_bid_datas_3.bank_code, successful_bid_datas_3.financial_institution_name,name_conversions.financial_institution_name AS name_conversion_fi_name
+FROM (successful_bid_datas_3 LEFT JOIN name_conversions ON successful_bid_datas_3.bank_code = name_conversions.bank_code) INNER JOIN bid_datas ON (successful_bid_datas_3.department_code = bid_datas.department_code) AND (successful_bid_datas_3.bank_code = bid_datas.bank_code) AND (successful_bid_datas_3.auction_date = bid_datas.auction_date)
+WHERE (((successful_bid_datas_3.department_code) = $P{dept_code}) AND ((successful_bid_datas_3.financial_institution_name) NOT LIKE '%計%') AND ((successful_bid_datas_3.auction_date) = $P{auction_date}) AND ((bid_datas.flag1) = '1'))]]>
+	</queryString>
+	<field name="bank_code" class="java.lang.Object"/>
+	<field name="financial_institution_name" class="java.lang.Object"/>
+	<field name="name_conversion_fi_name" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="1" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="229" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="59" width="176" height="35" uuid="8b0aae92-8395-4c6d-b481-3b09f7a109b9"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{financial_institution_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="208" y="132" width="147" height="19" uuid="36420f63-b54a-4d21-80c1-bbf3f6d2ccfb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[　落　　　札　　　書      （ 政府保証付借入）]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="209" y="151" width="146" height="28" uuid="f7e5394a-9e74-4742-95f0-932bfe7c6568"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[（ 政府保証付借入）]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="79" width="226" height="36" uuid="f55b0a7a-f13c-422f-b80c-6865f7e36c39"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[日本産業育成事業支援機構
+               代表取締役社長　銀行　太郎]]></text>
+			</staticText>
+			<line>
+				<reportElement x="45" y="203" width="1" height="25" uuid="e02a7e89-3d57-4bbb-a012-fee3b07d2c5c"/>
+			</line>
+			<staticText>
+				<reportElement x="456" y="203" width="98" height="24" uuid="f923b322-66e7-4860-8eb4-8c030079110c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[落札金額(億円)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="337" y="203" width="116" height="24" uuid="2a841c04-931a-4063-b6eb-0526ae603cd5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[落札利率(%)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="176" y="203" width="1" height="25" uuid="a9a5102c-d74a-49a5-9d8d-a5529c2153ce"/>
+			</line>
+			<line>
+				<reportElement x="0" y="202" width="1" height="25" uuid="8955d0ed-258c-474d-b117-a2595c52e63d"/>
+			</line>
+			<staticText>
+				<reportElement x="46" y="203" width="131" height="25" uuid="35e57b8e-c775-4747-9f80-0fbfdd4f4be0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[入札利率(%)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="176" y="203" width="151" height="24" uuid="27283086-ec49-42a9-bdcd-dccb9e489933"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[入札金額(億円)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="554" y="202" width="1" height="26" uuid="3d5fb4c5-0d9f-4a7b-8604-5eda762f9649"/>
+			</line>
+			<line>
+				<reportElement x="-1" y="202" width="328" height="1" uuid="a3faa612-9adb-49fe-8b88-0aa3f987b6b5"/>
+			</line>
+			<line>
+				<reportElement x="337" y="202" width="218" height="1" uuid="b59a276c-c93a-4edc-8ad6-072d5029b532"/>
+			</line>
+			<line>
+				<reportElement x="337" y="203" width="1" height="25" uuid="fca2c932-9061-415a-8371-ce1aec699f29"/>
+			</line>
+			<line>
+				<reportElement x="326" y="202" width="1" height="25" uuid="fd3d2336-676b-40cf-b76b-bcfdde912b16"/>
+			</line>
+			<line>
+				<reportElement x="-1" y="228" width="328" height="1" uuid="c22fbde1-f08e-48c1-82ca-2f77d8fd9e55"/>
+			</line>
+			<line>
+				<reportElement x="338" y="228" width="217" height="1" uuid="349f208e-a71a-4a8a-931a-cafc4b80d254"/>
+			</line>
+			<line>
+				<reportElement x="452" y="202" width="1" height="25" uuid="fabdc7b2-50b0-425a-80c8-b49a2c169640"/>
+			</line>
+			<textField>
+				<reportElement x="445" y="59" width="100" height="20" uuid="4b2c7801-1d22-4eb2-9cc2-c871d0f358b0"/>
+				<textFieldExpression><![CDATA[$P{auctionJp_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="186" y="59" width="127" height="35" uuid="319d994b-6749-49f4-88f1-b69fa840bc28"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[入札担当責任者　殿]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="196" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="-1" width="554" height="144" uuid="a83858b7-5ce1-40cf-804d-0b47d0901476"/>
+				<subreportParameter name="bank_code">
+					<subreportParameterExpression><![CDATA[$F{bank_code}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="dept_code">
+					<subreportParameterExpression><![CDATA[$P{dept_code}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="auction_date">
+					<subreportParameterExpression><![CDATA[$P{auction_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SuccessfulBidDocument_subreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="68" splitType="Stretch">
+			<staticText>
+				<reportElement x="45" y="4" width="462" height="64" uuid="6dc39872-683a-4b47-bf9f-a866b970384e"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[（注）
+ １．落札利率の合計は、１番～５番までの落札利率を落札金額ウェイト
+        により加重平均して、結果の0.001%単位未満を切捨てたもの。
+ ２．今後の事務日程は別添（参考）の通り。]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
